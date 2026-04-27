@@ -280,3 +280,68 @@ export const onboardingColleges = [
   'SRCC Delhi', 'St. Xavier\'s Mumbai', 'Jadavpur University', 'Anna University',
   'Delhi University', 'IIIT Hyderabad', 'NSUT Delhi', 'DTU Delhi',
 ];
+
+// ─── NOTICE BOARD ────────────────────────────────────────────────────────────
+
+export const notices = [
+  { id: 1, text: 'Found a blue ID card near the canteen bench. DM me to claim!', author: 'Anonymous', time: '2h ago', hoursLeft: 22, color: '#FFE033' },
+  { id: 2, text: 'Lost my charger in LH-101. If anyone found it please return to H4 room 203', author: 'Anonymous', time: '5h ago', hoursLeft: 19, color: '#FF2D78' },
+  { id: 3, text: 'Free snacks outside SAC auditorium — leftover from yesterday\'s event 🍕', author: 'Anonymous', time: '1h ago', hoursLeft: 23, color: '#00C851' },
+  { id: 4, text: 'Anyone interested in a morning jog group? Meet at the lake at 6am', author: 'Anonymous', time: '8h ago', hoursLeft: 16, color: '#1A3FFF' },
+  { id: 5, text: 'Found a set of keys near parking lot B. Has a keychain with "R" on it', author: 'Anonymous', time: '3h ago', hoursLeft: 21, color: '#FF5C1A' },
+];
+
+// ─── STUDENT DIRECTORY ───────────────────────────────────────────────────────
+
+export const studentDirectory = [
+  { id: 1, name: 'Arnav Saini', course: 'B.Tech Computer Science', year: '3rd Year' },
+  { id: 2, name: 'Priya Kapoor', course: 'B.Tech Electrical Engg.', year: '2nd Year' },
+  { id: 3, name: 'Rahul Das Sharma', course: 'B.Tech Mechanical Engg.', year: '4th Year' },
+  { id: 4, name: 'Dev Sharma', course: 'B.Tech Computer Science', year: '2nd Year' },
+  { id: 5, name: 'Ananya Mehta', course: 'B.Des Industrial Design', year: '3rd Year' },
+  { id: 6, name: 'Siddharth Patil', course: 'M.Tech AI & Data Science', year: '1st Year' },
+  { id: 7, name: 'Megha Reddy', course: 'B.Tech Chemical Engg.', year: '4th Year' },
+  { id: 8, name: 'Vikram Joshi', course: 'B.Tech Civil Engg.', year: '3rd Year' },
+  { id: 9, name: 'Neha Gupta', course: 'B.Tech Computer Science', year: '2nd Year' },
+  { id: 10, name: 'Aditya Kumar', course: 'M.Sc Physics', year: '1st Year' },
+  { id: 11, name: 'Isha Verma', course: 'B.Tech Aerospace Engg.', year: '3rd Year' },
+  { id: 12, name: 'Rohan Singh', course: 'B.Tech Electrical Engg.', year: '4th Year' },
+  { id: 13, name: 'Kavya Nair', course: 'B.Des Communication Design', year: '2nd Year' },
+  { id: 14, name: 'Harsh Agarwal', course: 'B.Tech Computer Science', year: '1st Year' },
+  { id: 15, name: 'Tanvi Shah', course: 'B.Tech Biotech', year: '3rd Year' },
+  { id: 16, name: 'Arjun Reddy', course: 'B.Tech Mechanical Engg.', year: '2nd Year' },
+  { id: 17, name: 'Simran Kaur', course: 'M.Tech VLSI Design', year: '1st Year' },
+  { id: 18, name: 'Manish Tiwari', course: 'B.Tech Metallurgical Engg.', year: '4th Year' },
+  { id: 19, name: 'Riya Chopra', course: 'B.Tech Computer Science', year: '3rd Year' },
+  { id: 20, name: 'Kunal Malhotra', course: 'B.Tech Energy Engg.', year: '2nd Year' },
+];
+
+// ─── POTENTIAL WINDOW (Tinder-like) ──────────────────────────────────────────
+
+export const potentialProfiles = [
+  { id: 1, name: 'Priya K.', avatar: 'PK', color: '#FF2D78', year: '2nd Year', dept: 'Electrical Engg.', bio: 'Music lover 🎵 Coffee addict ☕', gender: 'female' },
+  { id: 2, name: 'Rahul D.', avatar: 'RD', color: '#1A3FFF', year: '4th Year', dept: 'Mechanical Engg.', bio: 'Cricket fanatic 🏏 & gym rat 💪', gender: 'male' },
+  { id: 3, name: 'Ananya M.', avatar: 'AM', color: '#FF5C1A', year: '3rd Year', dept: 'Industrial Design', bio: 'Sketching my way through college ✏️', gender: 'female' },
+  { id: 4, name: 'Dev S.', avatar: 'DS', color: '#00C851', year: '2nd Year', dept: 'Computer Science', bio: 'Open source contributor & gamer 🎮', gender: 'male' },
+  { id: 5, name: 'Megha R.', avatar: 'MR', color: '#8B5CF6', year: '4th Year', dept: 'Chemical Engg.', bio: 'Chai over coffee, always ☕', gender: 'female' },
+  { id: 6, name: 'Sid P.', avatar: 'SP', color: '#FFE033', year: '3rd Year', dept: 'Computer Science', bio: 'Photography & late night coding sessions', gender: 'male' },
+];
+
+// ─── CAMPUS ANONYMOUS POSTS ─────────────────────────────────────────────────
+
+export const campusAnonPosts = [
+  { id: 101, text: 'Just saw a cat inside the lecture hall during a viva 😂 Prof didn\'t even notice', image: 'https://picsum.photos/seed/anoncat/400/300', likes: 89, comments: 12, time: '1h ago', tag: 'Spotted' },
+  { id: 102, text: 'Someone parked their cycle ON the staircase of H3. Absolute madlad energy', likes: 134, comments: 23, time: '3h ago', tag: 'Spotted' },
+  { id: 103, text: 'The sunset from the 5th floor of the main building today was unreal 🌅', image: 'https://picsum.photos/seed/anonsunset/400/300', likes: 201, comments: 8, time: '5h ago', tag: 'Vibes' },
+  { id: 104, text: 'Power cut in H7 during the cricket match final over. The chaos was legendary', likes: 312, comments: 45, time: '8h ago', tag: 'Drama' },
+];
+
+// ─── TEA (anonymous discussion) ──────────────────────────────────────────────
+
+export const teaThreads = [
+  { id: 201, title: 'That couple in the library who think nobody can see them holding hands behind the shelf 👀', votes: 456, commentCount: 89, time: '1h', hot: true },
+  { id: 202, title: 'Prof who comes in a Ferrari but gives us assignments like we have no life', votes: 312, commentCount: 67, time: '3h', hot: true },
+  { id: 203, title: 'The unspoken rule about not sitting in someone\'s "seat" in the last bench', votes: 178, commentCount: 45, time: '5h', hot: false },
+  { id: 204, title: 'Whoever is cooking maggi at 3am in H4 — drop the recipe, it smells incredible', votes: 234, commentCount: 34, time: '8h', hot: true },
+  { id: 205, title: 'That one friend who says "I didn\'t study at all" and then scores 95', votes: 567, commentCount: 123, time: '12h', hot: true },
+];

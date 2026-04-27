@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import { C, BORDER, BORDER_SM, SHADOW, FONT } from '../design';
-import { feedPosts, clubs as clubsData, events as eventsData, announcements as announcementsData } from '../data/mock';
+import { feedPosts, clubs as clubsData, events as eventsData, announcements as announcementsData, campusAnonPosts } from '../data/mock';
 import AnnouncementCard from '../components/AnnouncementCard';
 import PostCard from '../components/PostCard';
 import Tag from '../components/Tag';
+import StudentDirectory from '../components/StudentDirectory';
 
 const CollegePage = ({ college, isOwnCampus = false, goBack }) => {
   const [activeTab, setActiveTab] = useState('feed');
+  const [newAnonPost, setNewAnonPost] = useState('');
+  const [anonPosts, setAnonPosts] = useState(campusAnonPosts);
+  const [showAddAnon, setShowAddAnon] = useState(false);
+  const [likedAnon, setLikedAnon] = useState({});
 
   const tabs = [
     { id: 'feed', label: '📸 FEED' },
@@ -14,6 +19,19 @@ const CollegePage = ({ college, isOwnCampus = false, goBack }) => {
     { id: 'events', label: '📅 EVENTS' },
     { id: 'info', label: 'ℹ️ INFO' },
   ];
+
+  const handleAddAnonPost = () => {
+    if (!newAnonPost.trim()) return;
+    const post = {
+      id: Date.now(),
+      text: newAnonPost,
+      likes: 0, comments: 0,
+      time: 'Just now', tag: 'New',
+    };
+    setAnonPosts([post, ...anonPosts]);
+    setNewAnonPost('');
+    setShowAddAnon(false);
+  };
 
   return (
     <div style={{ background: C.bg, minHeight: '100%', fontFamily: FONT.body }}>
@@ -94,7 +112,7 @@ const CollegePage = ({ college, isOwnCampus = false, goBack }) => {
         ))}
       </div>
 
-      {/* ─── ANNOUNCEMENTS (shown on feed tab) ─────────────────────────── */}
+      {/* ─── FEED TAB ─────────────────────────────────────────────── */}
       {activeTab === 'feed' && (
         <div style={{ padding: '12px 14px 0' }}>
           {/* Announcements */}
@@ -110,24 +128,109 @@ const CollegePage = ({ college, isOwnCampus = false, goBack }) => {
             </div>
           </div>
 
-          {/* Feed posts */}
+          {/* Anonymous Campus Posts */}
           <div style={{
             fontSize: 9, fontWeight: 700, letterSpacing: '0.12em',
             color: C.greyDark, marginBottom: 8, marginTop: 16,
-          }}>📸 RECENT POSTS</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, paddingBottom: 16 }}>
-            {feedPosts.filter(p => p.type !== 'poll').slice(0, 3).map(post => (
-              <PostCard
-                key={post.id}
-                post={post}
-                style={!isOwnCampus ? { opacity: 0.92 } : {}}
+            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+          }}>
+            <span>🎭 CAMPUS HAPPENINGS</span>
+            {isOwnCampus && (
+              <button onClick={() => setShowAddAnon(!showAddAnon)} style={{
+                background: C.yellow, border: BORDER_SM, padding: '3px 8px',
+                fontSize: 7, fontWeight: 700, fontFamily: FONT.body,
+                boxShadow: SHADOW.sm,
+              }}>+ POST</button>
+            )}
+          </div>
+
+          <div style={{
+            background: C.pink + '15', border: `2px solid ${C.pink}40`,
+            padding: '6px 10px', marginBottom: 10,
+            fontSize: 8, color: C.grey, display: 'flex', alignItems: 'center', gap: 6,
+          }}>
+            <span>🎭</span>
+            <span>These posts are anonymous and won't appear on your profile</span>
+          </div>
+
+          {/* Add anonymous post form */}
+          {showAddAnon && (
+            <div className="animate-slide-up" style={{
+              background: C.white, border: BORDER, boxShadow: SHADOW.md,
+              padding: 12, marginBottom: 10,
+            }}>
+              <textarea
+                value={newAnonPost}
+                onChange={e => setNewAnonPost(e.target.value)}
+                placeholder="Something wild happening on campus? Spill it anonymously..."
+                style={{
+                  width: '100%', height: 60, border: BORDER_SM, padding: 8,
+                  fontFamily: FONT.body, fontSize: 10, resize: 'none',
+                  background: C.bg, boxSizing: 'border-box',
+                }}
               />
+              <div style={{ display: 'flex', gap: 6, marginTop: 8, justifyContent: 'flex-end' }}>
+                <button onClick={() => setShowAddAnon(false)} style={{
+                  background: C.white, border: BORDER_SM, padding: '4px 10px',
+                  fontSize: 8, fontWeight: 700, fontFamily: FONT.body,
+                }}>CANCEL</button>
+                <button onClick={handleAddAnonPost} style={{
+                  background: C.black, color: C.yellow, border: BORDER_SM,
+                  padding: '4px 10px', fontSize: 8, fontWeight: 700, fontFamily: FONT.body,
+                }}>POST ANON</button>
+              </div>
+            </div>
+          )}
+
+          {/* Anonymous posts list */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, paddingBottom: 16 }}>
+            {anonPosts.map(post => (
+              <div key={post.id} className="animate-slide-up" style={{
+                background: C.white, border: BORDER, boxShadow: SHADOW.sm,
+                padding: 14,
+              }}>
+                <div style={{
+                  display: 'flex', justifyContent: 'space-between', marginBottom: 8,
+                }}>
+                  <span style={{
+                    fontFamily: FONT.body, fontSize: 8, fontWeight: 700,
+                    background: post.tag === 'Spotted' ? C.orange : post.tag === 'Drama' ? C.pink : post.tag === 'Vibes' ? C.blue : C.yellow,
+                    color: post.tag === 'New' ? C.black : C.white,
+                    border: `2px solid ${C.black}`,
+                    padding: '2px 8px', letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                  }}>{post.tag}</span>
+                  <span style={{ fontSize: 8, color: C.grey }}>{post.time}</span>
+                </div>
+                {post.image && (
+                  <div style={{ margin: '0 -14px 10px', borderTop: BORDER_SM, borderBottom: BORDER_SM, overflow: 'hidden' }}>
+                    <img src={post.image} alt="" style={{ width: '100%', height: 180, objectFit: 'cover', display: 'block' }} />
+                  </div>
+                )}
+                <div style={{
+                  fontSize: 12, color: C.black, lineHeight: 1.5, marginBottom: 10,
+                }}>{post.text}</div>
+                <div style={{
+                  display: 'flex', gap: 10, alignItems: 'center',
+                }}>
+                  <button onClick={() => setLikedAnon(l => ({ ...l, [post.id]: !l[post.id] }))} style={{
+                    background: likedAnon[post.id] ? C.pink : 'transparent',
+                    border: likedAnon[post.id] ? BORDER_SM : `2px solid ${C.greyLight}`,
+                    padding: '4px 10px', fontFamily: FONT.body,
+                    fontSize: 10, fontWeight: 700,
+                    color: likedAnon[post.id] ? C.white : C.black,
+                    display: 'flex', alignItems: 'center', gap: 4,
+                  }}>♥ {post.likes + (likedAnon[post.id] ? 1 : 0)}</button>
+                  <span style={{ fontSize: 9, color: C.grey }}>◈ {post.comments}</span>
+                  <span style={{ fontSize: 8, color: C.grey, marginLeft: 'auto' }}>🎭 Anonymous</span>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       )}
 
-      {/* ─── CLUBS TAB ─────────────────────────────────────────────────── */}
+      {/* ─── CLUBS TAB ─────────────────────────────────────────────── */}
       {activeTab === 'clubs' && (
         <div className="stagger" style={{
           padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 8,
@@ -161,7 +264,7 @@ const CollegePage = ({ college, isOwnCampus = false, goBack }) => {
         </div>
       )}
 
-      {/* ─── EVENTS TAB ────────────────────────────────────────────────── */}
+      {/* ─── EVENTS TAB ────────────────────────────────────────────── */}
       {activeTab === 'events' && (
         <div className="stagger" style={{
           padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 10,
@@ -218,7 +321,7 @@ const CollegePage = ({ college, isOwnCampus = false, goBack }) => {
         </div>
       )}
 
-      {/* ─── INFO TAB ──────────────────────────────────────────────────── */}
+      {/* ─── INFO TAB ──────────────────────────────────────────────── */}
       {activeTab === 'info' && (
         <div className="animate-fade" style={{ padding: '16px 14px' }}>
           <div style={{
@@ -275,6 +378,9 @@ const CollegePage = ({ college, isOwnCampus = false, goBack }) => {
               ))}
             </div>
           </div>
+
+          {/* Student Directory */}
+          {isOwnCampus && <StudentDirectory />}
         </div>
       )}
     </div>

@@ -1,10 +1,11 @@
 import { C, BORDER, SHADOW, FONT } from '../design';
-import { stories, feedPosts } from '../data/mock';
+import { stories, feedPosts, notices } from '../data/mock';
 import StoryBar from '../components/StoryBar';
 import PostCard from '../components/PostCard';
 import PollCard from '../components/PollCard';
+import NoticeBoard from '../components/NoticeBoard';
 
-const FeedScreen = ({ onCreateStory, onCreatePost }) => {
+const FeedScreen = ({ onCreateStory, onCreatePost, onOpenNotifications, requestCount }) => {
   return (
     <div style={{ background: C.bg, minHeight: '100%', fontFamily: FONT.body }}>
       {/* Header */}
@@ -14,7 +15,7 @@ const FeedScreen = ({ onCreateStory, onCreatePost }) => {
         borderBottom: BORDER,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          {/* Add Story button (Instagram-style top-left +) */}
+          {/* Add Story button */}
           <button onClick={onCreateStory} style={{
             background: C.yellow, border: BORDER,
             width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -35,21 +36,40 @@ const FeedScreen = ({ onCreateStory, onCreatePost }) => {
             width: 34, height: 34, display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontSize: 15, color: C.black, boxShadow: SHADOW.sm,
           }}>📷</button>
-          <button style={{
+          <button onClick={onOpenNotifications} style={{
             background: 'transparent', border: `2px solid #444`,
             width: 34, height: 34, display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: 14, color: C.white,
-          }}>🔔</button>
+            fontSize: 14, color: C.white, position: 'relative',
+          }}>
+            🔔
+            {requestCount > 0 && (
+              <div style={{
+                position: 'absolute', top: -4, right: -4,
+                width: 14, height: 14, borderRadius: '50%',
+                background: C.pink, border: `2px solid ${C.black}`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: 7, fontWeight: 700, color: C.white,
+              }}>{requestCount}</div>
+            )}
+          </button>
         </div>
       </div>
 
       {/* Stories */}
       <StoryBar stories={stories} onAddStory={onCreateStory} />
 
+      {/* Notice Board */}
+      <NoticeBoard notices={notices} />
+
+      {/* Divider */}
+      <div style={{
+        borderBottom: `2px solid ${C.black}`, margin: '0 14px',
+      }} />
+
       {/* Posts */}
       <div style={{ padding: '0 0 20px' }}>
         {feedPosts.map(post => (
-          <div key={post.id} style={{ margin: '14px 14px 0' }}>
+          <div key={post.id} style={{ margin: '20px 14px 0' }}>
             {post.type === 'poll' ? (
               <PollCard post={post} />
             ) : (

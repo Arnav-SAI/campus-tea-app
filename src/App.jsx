@@ -9,6 +9,7 @@ import CollegePage from './screens/CollegePage';
 import CreateScreen from './screens/Create';
 import ProfileScreen from './screens/Profile';
 import EditProfile from './screens/EditProfile';
+import NotificationPanel from './components/NotificationPanel';
 
 export default function App() {
   const [onboarded, setOnboarded] = useState(false);
@@ -18,12 +19,19 @@ export default function App() {
   const [createOpen, setCreateOpen] = useState(false);
   const [createMode, setCreateMode] = useState('post');
   const [editProfileOpen, setEditProfileOpen] = useState(false);
+  const [notifOpen, setNotifOpen] = useState(false);
 
   // Thread view
   const [activeThread, setActiveThread] = useState(null);
 
   // College view
   const [viewingCollege, setViewingCollege] = useState(null);
+
+  // Potential Window state
+  const [potentialRequests, setPotentialRequests] = useState([
+    { id: 99, name: 'Neha Gupta', avatar: 'NG', color: '#8B5CF6', dept: 'Computer Science', year: '2nd Year', bio: 'Bookworm 📚 and coffee addict ☕', socials: { instagram: '@neha.gupta', linkedin: 'neha-gupta' } },
+  ]);
+  const [acceptedMatches, setAcceptedMatches] = useState([]);
 
   // ─── NAVIGATION HELPERS ──────────────────────────────────────────────
 
@@ -38,6 +46,19 @@ export default function App() {
 
   const viewCollege = (college) => {
     setViewingCollege(college);
+  };
+
+  const handleSendPotentialRequest = (profile) => {
+    // In real app, this sends a request to the other user
+    console.log('Sent interest to:', profile.name);
+  };
+
+  const handleAcceptRequest = (reqId) => {
+    const req = potentialRequests.find(r => r.id === reqId);
+    if (req) {
+      setAcceptedMatches(prev => [...prev, { ...req }]);
+      setPotentialRequests(prev => prev.filter(r => r.id !== reqId));
+    }
   };
 
   // ─── RENDER SCREENS ──────────────────────────────────────────────────
@@ -65,6 +86,8 @@ export default function App() {
           <FeedScreen
             onCreateStory={() => openCreate('story')}
             onCreatePost={() => openCreate('post')}
+            onOpenNotifications={() => setNotifOpen(true)}
+            requestCount={potentialRequests.length}
           />
         );
       case 'discuss':
@@ -72,6 +95,7 @@ export default function App() {
           <DiscussScreen
             onOpenThread={openThread}
             onCreateThread={() => openCreate('thread')}
+            onSendPotentialRequest={handleSendPotentialRequest}
           />
         );
       case 'campus':
@@ -85,7 +109,7 @@ export default function App() {
           />
         );
       default:
-        return <FeedScreen onCreateStory={() => openCreate('story')} onCreatePost={() => openCreate('post')} />;
+        return <FeedScreen onCreateStory={() => openCreate('story')} onCreatePost={() => openCreate('post')} onOpenNotifications={() => setNotifOpen(true)} requestCount={potentialRequests.length} />;
     }
   };
 
@@ -138,6 +162,16 @@ export default function App() {
       {/* Edit profile overlay */}
       {editProfileOpen && (
         <EditProfile onBack={() => setEditProfileOpen(false)} />
+      )}
+
+      {/* Notification panel overlay */}
+      {notifOpen && (
+        <NotificationPanel
+          onClose={() => setNotifOpen(false)}
+          requests={potentialRequests}
+          accepted={acceptedMatches}
+          onAcceptRequest={handleAcceptRequest}
+        />
       )}
     </div>
   );
