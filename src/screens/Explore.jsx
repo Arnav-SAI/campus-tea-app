@@ -61,26 +61,27 @@ const ExploreScreen = ({ onViewCollege }) => {
       {view === 'images' && (
         <div className="animate-fade" style={{ padding: 12 }}>
           <div style={{
-            display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 6,
+            columnCount: 2, columnGap: 12,
           }}>
             {explorePosts.map(p => (
               <div key={p.id} style={{
                 border: BORDER_SM, overflow: 'hidden',
                 position: 'relative', cursor: 'pointer',
                 transition: 'transform 0.1s',
+                marginBottom: 12, breakInside: 'avoid',
               }}>
                 <img src={p.image} alt="" style={{
-                  width: '100%', height: 110, objectFit: 'cover',
+                  width: '100%', display: 'block',
                 }} />
                 <div style={{
                   position: 'absolute', bottom: 0, left: 0, right: 0,
-                  background: 'rgba(0,0,0,0.8)', padding: '4px 6px',
+                  background: 'rgba(0,0,0,0.7)', padding: '6px 8px',
                   display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                 }}>
                   <span style={{
-                    color: p.collegeColor, fontSize: 7, fontWeight: 700,
+                    color: p.collegeColor, fontSize: 10, fontWeight: 700,
                   }}>{p.college}</span>
-                  <span style={{ color: C.white, fontSize: 7 }}>♥ {p.likes}</span>
+                  <span style={{ color: C.white, fontSize: 10 }}>♥ {p.likes}</span>
                 </div>
               </div>
             ))}

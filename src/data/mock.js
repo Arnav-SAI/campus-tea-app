@@ -253,15 +253,15 @@ export const announcements = [
 // ─── EXPLORE DATA ────────────────────────────────────────────────────────────
 
 export const explorePosts = [
-  { id: 1, image: 'https://picsum.photos/seed/exp1/300/300', college: 'BITS', collegeColor: '#FF2D78', likes: 892, user: 'bits_life' },
-  { id: 2, image: 'https://picsum.photos/seed/exp2/300/300', college: 'IITD', collegeColor: '#1A3FFF', likes: 1204, user: 'delhi_diaries' },
-  { id: 3, image: 'https://picsum.photos/seed/exp3/300/300', college: 'NITT', collegeColor: '#FF5C1A', likes: 567, user: 'nitt_tales' },
-  { id: 4, image: 'https://picsum.photos/seed/exp4/300/300', college: 'VIT', collegeColor: '#00C851', likes: 2341, user: 'vit_vibes' },
-  { id: 5, image: 'https://picsum.photos/seed/exp5/300/300', college: 'IITM', collegeColor: '#1A3FFF', likes: 445, user: 'madras_moods' },
-  { id: 6, image: 'https://picsum.photos/seed/exp6/300/300', college: 'SRCC', collegeColor: '#8B5CF6', likes: 789, user: 'srcc_squad' },
-  { id: 7, image: 'https://picsum.photos/seed/exp7/300/300', college: 'JU', collegeColor: '#FF5C1A', likes: 334, user: 'ju_stories' },
-  { id: 8, image: 'https://picsum.photos/seed/exp8/300/300', college: 'SXC', collegeColor: '#FFE033', likes: 612, user: 'xaviers_life' },
-  { id: 9, image: 'https://picsum.photos/seed/exp9/300/300', college: 'BITS', collegeColor: '#FF2D78', likes: 1567, user: 'pilani_pages' },
+  { id: 1, image: 'https://picsum.photos/seed/exp1/400/600', college: 'BITS', collegeColor: '#FF2D78', likes: 892, user: 'bits_life' },
+  { id: 2, image: 'https://picsum.photos/seed/exp2/600/400', college: 'IITD', collegeColor: '#1A3FFF', likes: 1204, user: 'delhi_diaries' },
+  { id: 3, image: 'https://picsum.photos/seed/exp3/400/500', college: 'NITT', collegeColor: '#FF5C1A', likes: 567, user: 'nitt_tales' },
+  { id: 4, image: 'https://picsum.photos/seed/exp4/400/400', college: 'VIT', collegeColor: '#00C851', likes: 2341, user: 'vit_vibes' },
+  { id: 5, image: 'https://picsum.photos/seed/exp5/400/700', college: 'IITM', collegeColor: '#1A3FFF', likes: 445, user: 'madras_moods' },
+  { id: 6, image: 'https://picsum.photos/seed/exp6/500/400', college: 'SRCC', collegeColor: '#8B5CF6', likes: 789, user: 'srcc_squad' },
+  { id: 7, image: 'https://picsum.photos/seed/exp7/400/600', college: 'JU', collegeColor: '#FF5C1A', likes: 334, user: 'ju_stories' },
+  { id: 8, image: 'https://picsum.photos/seed/exp8/400/400', college: 'SXC', collegeColor: '#FFE033', likes: 612, user: 'xaviers_life' },
+  { id: 9, image: 'https://picsum.photos/seed/exp9/600/400', college: 'BITS', collegeColor: '#FF2D78', likes: 1567, user: 'pilani_pages' },
 ];
 
 export const trendingMixed = [
