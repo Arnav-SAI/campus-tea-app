@@ -15,8 +15,13 @@ const NavBar = ({ active, setScreen }) => {
       background: C.black, borderTop: BORDER,
       padding: '8px 4px',
       paddingBottom: 'max(20px, env(safe-area-inset-bottom, 20px))',
-      position: 'relative', zIndex: 100,
-      flexShrink: 0,
+      position: 'fixed',
+      bottom: 0,
+      left: '50%',
+      transform: 'translateX(-50%)',
+      width: '100%',
+      maxWidth: 390,
+      zIndex: 100,
     }}>
       {tabs.map(t => (
         <button key={t.id}

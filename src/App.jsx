@@ -155,12 +155,12 @@ export default function App() {
       background: '#F5F0E8',
       position: 'relative',
     }}>
-      {/* Screen content */}
-      <div style={{ flex: 1, overflowY: 'auto' }}>
+      {/* Screen content — extra bottom padding so content isn't hidden behind fixed nav */}
+      <div style={{ flex: 1, overflowY: 'auto', paddingBottom: !activeThread && !viewingCollege ? 72 : 0 }}>
         {renderScreen()}
       </div>
 
-      {/* Bottom nav */}
+      {/* Bottom nav — fixed position, rendered outside flow */}
       {!activeThread && !viewingCollege && (
         <NavBar active={screen} setScreen={(s) => {
           setScreen(s);
