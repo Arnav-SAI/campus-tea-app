@@ -118,9 +118,11 @@ export default function App() {
   if (!onboarded) {
     return (
       <div style={{
-        maxWidth: 390, margin: '0 auto', height: '100vh',
+        maxWidth: 390, margin: '0 auto',
+        height: '100vh', height: '100dvh',
         overflow: 'auto', fontFamily: "'Space Mono', monospace",
         background: '#FFE033',
+        WebkitOverflowScrolling: 'touch',
       }}>
         <OnboardingScreen onDone={() => setOnboarded(true)} />
       </div>
@@ -131,7 +133,8 @@ export default function App() {
 
   return (
     <div style={{
-      maxWidth: 390, margin: '0 auto', height: '100vh',
+      maxWidth: 390, margin: '0 auto',
+      height: '100vh', height: '100dvh',
       display: 'flex', flexDirection: 'column', overflow: 'hidden',
       fontFamily: "'Space Mono', monospace",
       background: '#F5F0E8',

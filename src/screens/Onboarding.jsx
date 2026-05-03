@@ -14,9 +14,12 @@ const OnboardingScreen = ({ onDone }) => {
   // ─── SPLASH ──────────────────────────────────────────────────────────
   if (step === 0) return (
     <div style={{
-      background: C.yellow, minHeight: '100%',
+      background: C.yellow,
+      minHeight: '100vh', minHeight: '100dvh',
       display: 'flex', flexDirection: 'column', justifyContent: 'center',
-      padding: 28, fontFamily: FONT.body,
+      padding: 28,
+      paddingBottom: 'max(28px, env(safe-area-inset-bottom, 28px))',
+      fontFamily: FONT.body,
     }}>
       {/* Logo */}
       <div className="animate-pop" style={{
@@ -64,7 +67,10 @@ const OnboardingScreen = ({ onDone }) => {
   // ─── COLLEGE SELECT ──────────────────────────────────────────────────
   return (
     <div style={{
-      background: C.bg, minHeight: '100%', padding: 24,
+      background: C.bg,
+      minHeight: '100vh', minHeight: '100dvh',
+      padding: 24,
+      paddingBottom: 'max(24px, env(safe-area-inset-bottom, 24px))',
       fontFamily: FONT.body,
     }}>
       <div className="animate-slide-up" style={{ marginBottom: 24 }}>
