@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import NavBar from './components/NavBar';
 import OnboardingScreen from './screens/Onboarding';
 import FeedScreen from './screens/Feed';
@@ -14,6 +14,21 @@ import NotificationPanel from './components/NotificationPanel';
 export default function App() {
   const [onboarded, setOnboarded] = useState(false);
   const [screen, setScreen] = useState('feed');
+  const [appHeight, setAppHeight] = useState(window.innerHeight);
+
+  // Bulletproof mobile viewport height — works on all Android/iOS browsers
+  useEffect(() => {
+    const updateHeight = () => setAppHeight(window.innerHeight);
+    window.addEventListener('resize', updateHeight);
+    window.addEventListener('orientationchange', () => {
+      setTimeout(updateHeight, 100);
+    });
+    updateHeight();
+    return () => {
+      window.removeEventListener('resize', updateHeight);
+      window.removeEventListener('orientationchange', updateHeight);
+    };
+  }, []);
 
   // Overlay states
   const [createOpen, setCreateOpen] = useState(false);
@@ -119,7 +134,7 @@ export default function App() {
     return (
       <div style={{
         maxWidth: 390, margin: '0 auto',
-        height: '100vh', height: '100dvh',
+        height: appHeight,
         overflow: 'auto', fontFamily: "'Space Mono', monospace",
         background: '#FFE033',
         WebkitOverflowScrolling: 'touch',
@@ -134,7 +149,7 @@ export default function App() {
   return (
     <div style={{
       maxWidth: 390, margin: '0 auto',
-      height: '100vh', height: '100dvh',
+      height: appHeight,
       display: 'flex', flexDirection: 'column', overflow: 'hidden',
       fontFamily: "'Space Mono', monospace",
       background: '#F5F0E8',

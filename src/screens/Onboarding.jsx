@@ -68,77 +68,92 @@ const OnboardingScreen = ({ onDone }) => {
   return (
     <div style={{
       background: C.bg,
-      minHeight: '100vh', minHeight: '100dvh',
-      padding: 24,
-      paddingBottom: 'max(24px, env(safe-area-inset-bottom, 24px))',
+      height: '100%',
+      display: 'flex', flexDirection: 'column',
       fontFamily: FONT.body,
     }}>
-      <div className="animate-slide-up" style={{ marginBottom: 24 }}>
-        <div style={{
-          fontFamily: FONT.heading, fontSize: 30,
-          color: C.black, letterSpacing: '-0.5px', marginBottom: 4,
-        }}>FIND YOUR COLLEGE</div>
-        <p style={{ fontSize: 10, color: C.greyDark, margin: 0 }}>
-          Select your institution to join its community
-        </p>
-      </div>
+      {/* Fixed header */}
+      <div style={{ padding: '24px 24px 0' }}>
+        <div className="animate-slide-up" style={{ marginBottom: 24 }}>
+          <div style={{
+            fontFamily: FONT.heading, fontSize: 30,
+            color: C.black, letterSpacing: '-0.5px', marginBottom: 4,
+          }}>FIND YOUR COLLEGE</div>
+          <p style={{ fontSize: 10, color: C.greyDark, margin: 0 }}>
+            Select your institution to join its community
+          </p>
+        </div>
 
-      {/* Search */}
-      <div className="animate-slide-up" style={{
-        border: BORDER, background: C.white,
-        padding: '10px 14px', boxShadow: SHADOW.sm, marginBottom: 20,
-        display: 'flex', alignItems: 'center', gap: 8,
-      }}>
-        <span style={{ fontSize: 14 }}>◎</span>
-        <input
-          type="text"
-          placeholder="Search colleges..."
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-          style={{
-            flex: 1, border: 'none', background: 'transparent',
-            fontSize: 11, fontWeight: 700, outline: 'none',
-          }}
-        />
-      </div>
-
-      {/* College list */}
-      <div className="stagger" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        {filtered.map(c => (
-          <button
-            key={c}
-            onClick={() => setSelected(c)}
-            className="animate-slide-up"
+        {/* Search */}
+        <div className="animate-slide-up" style={{
+          border: BORDER, background: C.white,
+          padding: '10px 14px', boxShadow: SHADOW.sm, marginBottom: 20,
+          display: 'flex', alignItems: 'center', gap: 8,
+        }}>
+          <span style={{ fontSize: 14 }}>◎</span>
+          <input
+            type="text"
+            placeholder="Search colleges..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
             style={{
-              background: selected === c ? C.yellow : C.white,
-              border: selected === c ? BORDER : `2px solid ${C.greyLight}`,
-              padding: '14px 16px', textAlign: 'left', cursor: 'pointer',
-              fontFamily: FONT.body, fontWeight: 700, fontSize: 12,
-              boxShadow: selected === c ? SHADOW.md : 'none',
-              display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-              transition: 'all 0.12s ease',
+              flex: 1, border: 'none', background: 'transparent',
+              fontSize: 11, fontWeight: 700, outline: 'none',
             }}
-          >
-            <span>{c}</span>
-            {selected === c && <span style={{ fontSize: 16 }}>✓</span>}
-          </button>
-        ))}
+          />
+        </div>
       </div>
 
-      {/* Join button */}
+      {/* Scrollable college list */}
+      <div style={{
+        flex: 1, overflowY: 'auto', padding: '0 24px',
+        WebkitOverflowScrolling: 'touch',
+      }}>
+        <div className="stagger" style={{ display: 'flex', flexDirection: 'column', gap: 8, paddingBottom: 8 }}>
+          {filtered.map(c => (
+            <button
+              key={c}
+              onClick={() => setSelected(c)}
+              className="animate-slide-up"
+              style={{
+                background: selected === c ? C.yellow : C.white,
+                border: selected === c ? BORDER : `2px solid ${C.greyLight}`,
+                padding: '14px 16px', textAlign: 'left', cursor: 'pointer',
+                fontFamily: FONT.body, fontWeight: 700, fontSize: 12,
+                boxShadow: selected === c ? SHADOW.md : 'none',
+                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                transition: 'all 0.12s ease',
+              }}
+            >
+              <span>{c}</span>
+              {selected === c && <span style={{ fontSize: 16 }}>✓</span>}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Sticky join button at the bottom */}
       {selected && (
-        <button
-          onClick={onDone}
-          className="animate-pop"
-          style={{
-            width: '100%', marginTop: 24,
-            background: C.black, color: C.yellow,
-            border: BORDER, padding: 16,
-            fontFamily: FONT.body, fontWeight: 700, fontSize: 13,
-            cursor: 'pointer', boxShadow: SHADOW.lg,
-            letterSpacing: '0.1em',
-          }}
-        >JOIN {selected.toUpperCase()} →</button>
+        <div style={{
+          padding: '16px 24px',
+          paddingBottom: 'max(16px, env(safe-area-inset-bottom, 16px))',
+          background: C.bg,
+          borderTop: `2px solid ${C.greyLight}`,
+          flexShrink: 0,
+        }}>
+          <button
+            onClick={onDone}
+            className="animate-pop"
+            style={{
+              width: '100%',
+              background: C.black, color: C.yellow,
+              border: BORDER, padding: 16,
+              fontFamily: FONT.body, fontWeight: 700, fontSize: 13,
+              cursor: 'pointer', boxShadow: SHADOW.lg,
+              letterSpacing: '0.1em',
+            }}
+          >JOIN {selected.toUpperCase()} →</button>
+        </div>
       )}
     </div>
   );
